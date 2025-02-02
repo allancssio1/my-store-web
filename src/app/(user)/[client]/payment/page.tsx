@@ -1,13 +1,14 @@
 'use client'
-import React, { useState, useEffect } from 'react'
-// import { useParams } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 import { ChefHat, ArrowLeft, Truck } from 'lucide-react'
 import type { CartItem, PaymentFormData } from '@/app/interfaces'
 import { FormPayment } from '@/app/_components/FormPayment'
 import { LoadingModal } from '@/app/_components/LoadingModal'
 
 function Payment() {
-  // const { client } = useParams()
+  const { client } = useParams()
+  const router = useRouter()
   const [cart, setCart] = useState<CartItem[]>([])
   const [total, setTotal] = useState(0)
   const [isLoading, setIsLoading] = useState(false)
@@ -19,6 +20,8 @@ function Payment() {
     if (cartItems && cartTotal) {
       setCart(JSON.parse(cartItems))
       setTotal(parseFloat(cartTotal))
+    } else {
+      router.replace(`/${client}/menu`)
     }
   }, [])
 
@@ -26,9 +29,11 @@ function Payment() {
     setIsLoading(true)
     console.log('🚀 ~ Payment ~ data:', data)
     // Aqui você processaria o pagamento
-    // alert('Pedido realizado com sucesso! Este é um demo.')
-    // localStorage.removeItem('cartItems')
-    // localStorage.removeItem('cartTotal')
+    alert('Pedido realizado com sucesso! Este é um demo.')
+    localStorage.removeItem('cartItems')
+    localStorage.removeItem('cartTotal')
+    setIsLoading(false)
+    router.push(`/${client}/menu`)
   }
 
   return (
@@ -37,7 +42,10 @@ function Payment() {
       <div className="bg-primary text-white py-6">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <button className="flex items-center gap-2 hover:text-gray-300 transition-colors">
+            <button
+              onClick={() => router.back()}
+              className="flex items-center gap-2 hover:text-gray-300 transition-colors"
+            >
               <ArrowLeft className="w-5 h-5" />
               Voltar ao Menu
             </button>
@@ -81,15 +89,23 @@ function Payment() {
                       </p>
                     </div>
                     <span className="font-medium">
-                      R$ {(item.price * item.quantity).toFixed(2)}
+                      {(item.price * item.quantity).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL',
+                      })}
                     </span>
                   </div>
                 ))}
               </div>
               <div className="border-t pt-4">
                 <div className="flex justify-between items-center text-lg font-bold text-primabg-primary">
-                  <span>Total:</span>
-                  <span>R$ {total.toFixed(2)}</span>
+                  <span>Total: </span>
+                  <span>
+                    {total.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </span>
                 </div>
               </div>
             </div>

@@ -25,7 +25,9 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pribg-primary"
           />
           {errors.nome && (
-            <span className="text-red-500 text-sm">{errors.nome.message}</span>
+            <span className="text-red-500 text-sm">
+              {'Este campo é obrigatório.'}
+            </span>
           )}
         </div>
 
@@ -36,14 +38,9 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             </label>
             <input
               type="email"
-              {...register('email', { required: true })}
+              {...register('email')}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pribg-primary"
             />
-            {errors.email && (
-              <span className="text-red-500 text-sm">
-                {errors.email.message}
-              </span>
-            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -59,7 +56,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             />
             {errors.telefone && (
               <span className="text-red-500 text-sm">
-                {errors.telefone.message}
+                {'Este campo é obrigatório.'}
               </span>
             )}
           </div>
@@ -78,7 +75,9 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pribg-primary"
           />
           {errors.cep && (
-            <span className="text-red-500 text-sm">{errors.cep.message}</span>
+            <span className="text-red-500 text-sm">
+              {'Este campo é obrigatório.'}
+            </span>
           )}
         </div>
 
@@ -94,7 +93,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             />
             {errors.endereco && (
               <span className="text-red-500 text-sm">
-                {errors.endereco.message}
+                {'Este campo é obrigatório.'}
               </span>
             )}
           </div>
@@ -109,7 +108,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             />
             {errors.numero && (
               <span className="text-red-500 text-sm">
-                {errors.numero.message}
+                {'Este campo é obrigatório.'}
               </span>
             )}
           </div>
@@ -126,7 +125,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
           />
           {errors.complemento && (
             <span className="text-red-500 text-sm">
-              {errors.complemento.message}
+              {'Este campo é obrigatório.'}
             </span>
           )}
         </div>
@@ -142,7 +141,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
           />
           {errors.bairro && (
             <span className="text-red-500 text-sm">
-              {errors.bairro.message}
+              {'Este campo é obrigatório.'}
             </span>
           )}
         </div>
@@ -159,7 +158,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             />
             {errors.cidade && (
               <span className="text-red-500 text-sm">
-                {errors.cidade.message}
+                {'Este campo é obrigatório.'}
               </span>
             )}
           </div>
@@ -174,7 +173,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             />
             {errors.estado && (
               <span className="text-red-500 text-sm">
-                {errors.estado.message}
+                {'Este campo é obrigatório.'}
               </span>
             )}
           </div>
@@ -204,7 +203,7 @@ export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {
             />
             {errors.troco && (
               <span className="text-red-500 text-sm">
-                {errors.troco.message}
+                {'Este campo é obrigatório.'}
               </span>
             )}
           </div>
