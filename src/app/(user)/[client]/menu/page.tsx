@@ -12,11 +12,23 @@ import {
   Minus,
   ShoppingCart,
 } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams, useRouter } from 'next/navigation'
 
 export default function Menu() {
   const [cart, setCart] = useState<CartItem[]>([])
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const { client } = useParams()
+  const router = useRouter()
+
+  useEffect(() => {
+    const cartItems = localStorage.getItem('cartItems')
+    const cartTotal = localStorage.getItem('cartTotal')
+
+    if (cartItems && cartTotal) {
+      setCart(JSON.parse(cartItems))
+    }
+  }, [])
 
   const addToCart = (item: MenuItem) => {
     setCart((currentCart) => {
@@ -50,6 +62,19 @@ export default function Menu() {
     (total, item) => total + item.price * item.quantity,
     0,
   )
+
+  const limitText = (text: string, limit: number = 70) => {
+    if (text.length <= limit) {
+      return text
+    }
+    return text.substring(0, limit) + '...'
+  }
+
+  const goPayment = () => {
+    localStorage.setItem('cartItems', JSON.stringify(cart))
+    localStorage.setItem('cartTotal', cartTotal.toString())
+    router.push(`/${client}/payment`)
+  }
 
   return (
     <div className="min-h-screen bg-[#faf7f2]">
@@ -150,11 +175,16 @@ export default function Menu() {
                 <div className="border-t pt-4">
                   <div className="flex justify-between items-center mb-4">
                     <span className="font-bold">Total:</span>
-                    <span className="font-bold">${cartTotal.toFixed(2)}</span>
+                    <span className="font-bold">
+                      {cartTotal.toLocaleString('pt-Br', {
+                        currency: 'BRL',
+                        style: 'currency',
+                      })}
+                    </span>
                   </div>
                   <button
+                    onClick={() => goPayment()}
                     className="w-full bg-primary text-white py-2 rounded-lg hover:bg-[#34495e] transition-colors"
-                    onClick={() => alert('Order placed! (This is a demo)')}
                   >
                     Place Order
                   </button>
@@ -191,10 +221,15 @@ export default function Menu() {
                     <h3 className="text-xl font-medium text-pribg-primary">
                       {item.name}
                     </h3>
-                    <p className="text-gray-600 mt-1">{item.description}</p>
+                    <p className="text-gray-600 mt-1 max-h-12 h-12 overflow-hidden">
+                      {limitText(item.description)}
+                    </p>
                   </div>
                   <span className="text-xl font-semibold text-pribg-primary">
-                    ${item.price}
+                    {item.price.toLocaleString('pt-Br', {
+                      currency: 'BRL',
+                      style: 'currency',
+                    })}
                   </span>
                 </div>
                 <button

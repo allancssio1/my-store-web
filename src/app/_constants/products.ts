@@ -11,8 +11,8 @@ export const menuItems: MenuItem[] = [
   {
     id: '1',
     name: 'Grilled Salmon',
-    description: 'Fresh Atlantic salmon with herbs and lemon butter sauce',
-    price: 28,
+    description: 'Fresh Atlantic salmon with herbs and lemon butter sauced',
+    price: 28.5,
     image: grilledSalmon,
   },
   {
