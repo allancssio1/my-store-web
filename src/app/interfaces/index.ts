@@ -31,3 +31,10 @@ export interface FormPaymentProps {
   onSubmit: (data: PaymentFormData) => void
   total: number
 }
+
+export interface InputFormProps {
+  label?: string
+  placeholder?: string
+  type?: string
+  classNameString?: string
+}
