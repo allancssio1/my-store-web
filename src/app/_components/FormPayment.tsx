@@ -1,5 +1,7 @@
-import { useForm } from 'react-hook-form'
+'use client'
+
 import { FormPaymentProps, PaymentFormData } from '../interfaces'
+import { useForm } from 'react-hook-form'
 import { maskCep, maskPhone } from '@/lib/utils'
 
 export const FormPayment = ({ onSubmit, total }: FormPaymentProps) => {

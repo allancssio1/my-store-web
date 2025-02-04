@@ -32,9 +32,22 @@ export interface FormPaymentProps {
   total: number
 }
 
-export interface InputFormProps {
-  label?: string
-  placeholder?: string
-  type?: string
-  classNameString?: string
+export interface LoginFormData {
+  username: string
+  password: string
+}
+
+export interface RegisterFormData {
+  company: string
+  username: string
+  password: string
+  confirmPassword: string
+  cnpj: string
+}
+
+export interface LoginFormDataProps {
+  onSubmit: (data: LoginFormData) => Promise<void>
+}
+export interface RegisterFormDataProps {
+  onSubmit: (data: RegisterFormData) => Promise<void>
 }

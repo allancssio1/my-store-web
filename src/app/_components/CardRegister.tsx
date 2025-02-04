@@ -1,3 +1,4 @@
+'use client'
 import {
   Card,
   CardHeader,
@@ -5,30 +6,18 @@ import {
   CardContent,
   CardFooter,
 } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { InputForm } from './InputForm'
-import { registerForm } from '@/app/_constants/form'
+import { RegisterFormDataProps } from '../interfaces'
+import { FormRegister } from './FormRegister'
 
-export const Register = () => {
+export const CardRegister = ({ onSubmit }: RegisterFormDataProps) => {
   return (
     <Card className="flex flex-col justify-center items-center text-center max-w-[500px] w-full mx-2 border-primary">
       <CardHeader className="mb-3">
-        <CardTitle className="text-3xl">Cadastro</CardTitle>
+        <CardTitle className="text-3xl">Criar conta</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col justify-center items-center gap-2 p-3 ">
-        {registerForm.map((input, index) => (
-          <InputForm
-            key={index}
-            label={input.label}
-            placeholder={input.placeholder}
-            type={input.type}
-            classNameString={input.classNameString}
-          />
-        ))}
+      <CardContent>
+        <FormRegister onSubmit={onSubmit} />
       </CardContent>
-      <CardFooter>
-        <Button>Entrar</Button>
-      </CardFooter>
     </Card>
   )
 }
