@@ -1,3 +1,5 @@
+import Register from './register'
+
 export default function Home() {
-  return <h1>sign in</h1>
+  return <Register />
 }
