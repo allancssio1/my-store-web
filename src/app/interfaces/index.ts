@@ -26,6 +26,15 @@ export interface PaymentFormData {
   metodoPagamento: 'dinheiro' | 'pix' | 'credito' | 'debito'
   troco?: string
 }
+export interface Product {
+  id: number
+  image: StaticImageData | string
+  title: string
+  description: string
+  quantity: number
+  originalPrice: number
+  currentPrice: number
+}
 
 export interface FormPaymentProps {
   onSubmit: (data: PaymentFormData) => void
